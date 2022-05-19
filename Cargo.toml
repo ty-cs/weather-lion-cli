@@ -9,4 +9,4 @@ edition = "2021"
 ureq = { version = "*", features = ["json", "charset"] }
 serde = { version = "1", features = ["derive"] }
 indicatif = { version = "0.17.0-rc.10"}
-
+colored = "2.0.0"
