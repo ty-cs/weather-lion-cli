@@ -91,6 +91,12 @@ fn get_emoji_from_weather_str(weather: &str) -> &str {
         } else {
             "☁️"
         }
+    } else if weather.contains("fair") {
+        if weather.contains("night") {
+            "☁️"
+        } else {
+            "🌤️"
+        }
     } else if weather.contains("clear") {
         if weather.contains("night") {
             "🌙"
