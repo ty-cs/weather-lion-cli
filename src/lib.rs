@@ -137,7 +137,7 @@ pub fn get_2hr_weather() -> Result<(), ureq::Error> {
         item.forecasts.iter().for_each(|forecast| {
             println!(
                 // since emoji actually took 2 characters, so we need to put two spaces between 2nd and 3rd element
-                "{:24} {}  {}",
+                "{:>24} {}  {}",
                 forecast.area,
                 get_emoji_from_weather_str(&forecast.forecast),
                 forecast.forecast,
