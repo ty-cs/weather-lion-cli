@@ -103,7 +103,7 @@ fn get_emoji_from_weather_str(weather: &str) -> &str {
         } else {
             "☀️"
         }
-    } else if weather.contains("rain") {
+    } else if weather.contains("rain") || weather.contains("showers") {
         if weather.contains("light") {
             "🌦"
         } else {
