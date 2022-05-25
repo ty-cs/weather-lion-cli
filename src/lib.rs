@@ -106,7 +106,7 @@ fn get_emoji_from_weather_str(weather: &str) -> &str {
 }
 
 pub fn get_2hr_weather() -> Result<(), ureq::Error> {
-    let started = Instant::now();
+    let _started = Instant::now();
     // let pb = get_pb();
 
     // pb.set_message("Loading...");
