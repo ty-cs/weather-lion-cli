@@ -1,4 +1,4 @@
-mod spinner;
-pub mod weather_forecast;
-pub mod temperature;
 mod aqi;
+mod spinner;
+pub mod temperature;
+pub mod weather_forecast;

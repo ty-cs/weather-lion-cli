@@ -199,14 +199,21 @@ pub fn get_24hr_weather() -> Result<(), ureq::Error> {
         } = general;
 
         println!("{}\n", "For the next 24 hour:".green());
-        println!("{:>11}: {:4}{}", "Forecast", get_emoji_from_weather_str(forecast), forecast);
+        println!(
+            "{:>11}: {:4}{}",
+            "Forecast",
+            get_emoji_from_weather_str(forecast),
+            forecast
+        );
         println!(
             "{:>11}: {:2} - {:2}",
             "Humidity", relative_humidity.low, relative_humidity.high
         );
         println!(
             "{:>11}: {:2} - {:2}",
-            "Temperature", get_styled_temp_str(temperature.low), get_styled_temp_str(temperature.high)
+            "Temperature",
+            get_styled_temp_str(temperature.low),
+            get_styled_temp_str(temperature.high)
         );
         println!(
             "{:>11}: {:2} - {:2}",
