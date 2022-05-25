@@ -1,2 +1,2 @@
-pub mod weather_forecast;
 mod spinner;
+pub mod weather_forecast;

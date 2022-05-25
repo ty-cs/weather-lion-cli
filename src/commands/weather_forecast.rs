@@ -1,6 +1,6 @@
-use std::time::{Duration, Instant};
 use colored::Colorize;
-use indicatif::{ProgressBar, ProgressStyle};
+use std::time::{Duration, Instant};
+
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -120,7 +120,11 @@ pub fn get_2hr_weather() -> Result<(), ureq::Error> {
                 forecast.forecast,
             );
         });
-        println!("\n{} {}", "Updated at".white(),item.update_timestamp.white());
+        println!(
+            "\n{} {}",
+            "Updated at".white(),
+            item.update_timestamp.white()
+        );
 
         // println!("\nUpdated at: {}", item.update_timestamp);
     });
@@ -146,16 +150,16 @@ struct General {
     forecast: String,
     relative_humidity: BetweenValue,
     temperature: BetweenValue,
-    wind: Wind
+    wind: Wind,
 }
 
 #[derive(Deserialize)]
 struct OneDayWeatherInfo {
-  items: Vec<OneDayWeatherInfoItem>,
+    items: Vec<OneDayWeatherInfoItem>,
     api_info: ApiInfo,
 }
 #[derive(Deserialize)]
-struct OneDayWeatherInfoItem{
+struct OneDayWeatherInfoItem {
     update_timestamp: String,
     general: General,
 }
@@ -182,11 +186,24 @@ pub fn get_24hr_weather() -> Result<(), ureq::Error> {
         } = general;
 
         println!("{}\n", "For the next 24 hour:".green());
-        println!("{:>11}: {}","Forecast", forecast);
-        println!("{:>11}: {:2} - {:2}","Humidity",  relative_humidity.low, relative_humidity.high);
-        println!("{:>11}: {:2} - {:2}","Temperature", temperature.low, temperature.high);
-        println!("{:>11}: {:2} - {:2}","Wind speed", wind.speed.low, wind.speed.high);
-        println!("\n{} {}", "Updated at".white(),item.update_timestamp.white());
+        println!("{:>11}: {}", "Forecast", forecast);
+        println!(
+            "{:>11}: {:2} - {:2}",
+            "Humidity", relative_humidity.low, relative_humidity.high
+        );
+        println!(
+            "{:>11}: {:2} - {:2}",
+            "Temperature", temperature.low, temperature.high
+        );
+        println!(
+            "{:>11}: {:2} - {:2}",
+            "Wind speed", wind.speed.low, wind.speed.high
+        );
+        println!(
+            "\n{} {}",
+            "Updated at".white(),
+            item.update_timestamp.white()
+        );
     });
     // TODO: only verbose output enabled
     // println!("\nDone in {:?}", started.elapsed());

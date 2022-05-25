@@ -1,5 +1,5 @@
-use std::time::Duration;
 use indicatif::{ProgressBar, ProgressStyle};
+use std::time::Duration;
 
 pub fn get_pb() -> ProgressBar {
     let pb = ProgressBar::new_spinner();
