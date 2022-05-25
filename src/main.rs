@@ -31,6 +31,9 @@ enum Commands {
     /// Get real-time air quality
     #[clap(name = "aqi")]
     AQI,
+    /// Get all data
+    #[clap(name = "a")]
+    All,
     /// Print shell completions to stdout
     Completions { shell: Option<Shell> },
 }
@@ -64,6 +67,14 @@ fn main() -> anyhow::Result<()> {
         }
         Commands::AQI => {
             println!("AQI");
+        }  Commands::All => {
+            get_24hr_weather()?;
+            println!();
+            get_2hr_weather()?;
+            println!();
+            get_temperature()?;
+
+
         }
     }
     Ok(())

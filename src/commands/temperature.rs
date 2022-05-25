@@ -27,13 +27,21 @@ pub fn get_temperature() -> anyhow::Result<()> {
     let items = body.items;
 
     items.iter().for_each(|item| {
-        println!("{}\n", "Real time Air temperature:".green());
+        println!("{}\n", "Real time Air Temperature:".green());
         let readings = &item.readings;
         readings.iter().for_each(|reading| {
             let ReadingInfo { station_id, value } = reading;
             println!("{:>4}: {:.1}", station_id, value);
         });
+        println!(
+            "\n{} {}",
+            "Updated at".white(),
+            item.timestamp.white()
+        );
     });
+
+
+
 
     Ok(())
 }
