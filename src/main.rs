@@ -67,14 +67,13 @@ fn main() -> anyhow::Result<()> {
         }
         Commands::AQI => {
             println!("AQI");
-        }  Commands::All => {
+        }
+        Commands::All => {
             get_24hr_weather()?;
             println!();
             get_2hr_weather()?;
             println!();
             get_temperature()?;
-
-
         }
     }
     Ok(())

@@ -33,15 +33,8 @@ pub fn get_temperature() -> anyhow::Result<()> {
             let ReadingInfo { station_id, value } = reading;
             println!("{:>4}: {:.1}", station_id, value);
         });
-        println!(
-            "\n{} {}",
-            "Updated at".white(),
-            item.timestamp.white()
-        );
+        println!("\n{} {}", "Updated at".white(), item.timestamp.white());
     });
-
-
-
 
     Ok(())
 }
