@@ -64,21 +64,6 @@ fn get_pb() -> ProgressBar {
     pb
 }
 
-fn get_emoji_from_weather(weather: &str) -> &str {
-    match weather {
-        "Clear" => "☀️",
-        "Clouds" => "☁️",
-        "Partly Cloudy" => "🌤️",
-        "Partly Cloudy (Night)" => "☁️",
-        "Drizzle" => "🌧",
-        "Rain" => "🌧",
-        "Thunderstorm" => "⛈",
-        "Snow" => "❄️",
-        "Mist" => "🌁",
-        _ => " ",
-    }
-}
-
 fn get_emoji_from_weather_str(weather: &str) -> &str {
     let weather = weather.to_lowercase();
     return if weather.contains("cloud") {
