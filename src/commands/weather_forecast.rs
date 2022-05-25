@@ -109,6 +109,8 @@ pub fn get_2hr_weather() -> Result<(), ureq::Error> {
     // pb.finish_and_clear();
 
     body.items.iter().for_each(|item| {
+        println!("{}\n", "For the next 2 hour:".green());
+
         item.forecasts.iter().for_each(|forecast| {
             println!(
                 // since emoji actually took 2 characters, so we need to put two spaces between 2nd and 3rd element
@@ -118,7 +120,9 @@ pub fn get_2hr_weather() -> Result<(), ureq::Error> {
                 forecast.forecast,
             );
         });
-        println!("\nUpdated at: {}", item.update_timestamp);
+        println!("\n{} {}", "Updated at".white(),item.update_timestamp.white());
+
+        // println!("\nUpdated at: {}", item.update_timestamp);
     });
     // TODO: only verbose output enabled
     // println!("\nDone in {:?}", started.elapsed());
@@ -177,7 +181,6 @@ pub fn get_24hr_weather() -> Result<(), ureq::Error> {
             temperature,
         } = general;
 
-        println!();
         println!("{}\n", "For the next 24 hour:".green());
         println!("{:>11}: {}","Forecast", forecast);
         println!("{:>11}: {:2} - {:2}","Humidity",  relative_humidity.low, relative_humidity.high);
