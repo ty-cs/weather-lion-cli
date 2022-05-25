@@ -1,5 +1,10 @@
+use std::io;
 use std::path::PathBuf;
-use clap::{Parser, Subcommand};
+
+use clap::{CommandFactory, Parser, Subcommand};
+use clap::{AppSettings, Arg, Command, ValueHint};
+use clap_complete::{generate, Generator, Shell};
+
 use weather_lion::commands::weather_forecast::{get_24hr_weather, get_2hr_weather};
 
 #[derive(Parser)]
@@ -20,6 +25,17 @@ enum Commands {
     #[clap(name = "24")]
     /// Get 24hr weather
     OneDay,
+    /// Get real-time air temperature
+    #[clap(name = "temp")]
+    Temperature,
+    /// Print shell completions to stdout
+    Completions {
+        shell: Option<Shell>
+    },
+}
+
+fn print_completions<G: Generator>(gen: G, cmd: &mut Command) {
+    generate(gen, cmd, cmd.get_name().to_string(), &mut io::stdout());
 }
 
 fn main() -> anyhow::Result<()> {
@@ -31,6 +47,21 @@ fn main() -> anyhow::Result<()> {
         }
         Commands::OneDay => {
             get_24hr_weather()?;
+        }
+        Commands::Completions { shell } => {
+            match *shell {
+                Some(shell) => {
+                    let mut cmd = Cli::command();
+                    eprintln!("Generating completion file for {}...", shell);
+                    print_completions(shell, &mut cmd);
+                }
+                None => {
+                    println!("No shell specified!")
+                }
+            }
+        }
+        Commands::Temperature => {
+            println!("Temperature: {}", "TODO");
         }
     }
     Ok(())
