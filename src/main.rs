@@ -3,6 +3,7 @@ use std::io;
 use clap::Command;
 use clap::{CommandFactory, Parser, Subcommand};
 use clap_complete::{generate, Generator, Shell};
+use weather_lion::commands::temperature::get_temperature;
 
 use weather_lion::commands::weather_forecast::{get_24hr_weather, get_2hr_weather};
 
@@ -27,6 +28,9 @@ enum Commands {
     /// Get real-time air temperature
     #[clap(name = "temp")]
     Temperature,
+    /// Get real-time air quality
+    #[clap(name = "aqi")]
+    AQI,
     /// Print shell completions to stdout
     Completions { shell: Option<Shell> },
 }
@@ -56,7 +60,10 @@ fn main() -> anyhow::Result<()> {
             }
         },
         Commands::Temperature => {
-            println!("Temperature: {}", "TODO");
+            get_temperature()?;
+        }
+        Commands::AQI => {
+            println!("AQI");
         }
     }
     Ok(())

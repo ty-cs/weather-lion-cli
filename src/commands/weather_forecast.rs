@@ -1,4 +1,4 @@
-use colored::Colorize;
+use colored::{ColoredString, Colorize};
 use std::time::{Duration, Instant};
 
 use serde::Deserialize;
@@ -139,6 +139,7 @@ struct Wind {
     speed: BetweenValue,
     direction: String,
 }
+
 #[derive(Deserialize)]
 struct BetweenValue {
     low: i32,
@@ -158,11 +159,23 @@ struct OneDayWeatherInfo {
     items: Vec<OneDayWeatherInfoItem>,
     api_info: ApiInfo,
 }
+
 #[derive(Deserialize)]
 struct OneDayWeatherInfoItem {
     update_timestamp: String,
     general: General,
 }
+
+fn get_styled_temp_str(temp: i32) -> ColoredString {
+    if temp > 30 {
+        return temp.to_string().red();
+    }
+    if temp < 20 {
+        return temp.to_string().blue();
+    }
+    temp.to_string().normal()
+}
+
 pub fn get_24hr_weather() -> Result<(), ureq::Error> {
     let _started = Instant::now();
     // let pb = get_pb();
@@ -186,14 +199,14 @@ pub fn get_24hr_weather() -> Result<(), ureq::Error> {
         } = general;
 
         println!("{}\n", "For the next 24 hour:".green());
-        println!("{:>11}: {}", "Forecast", forecast);
+        println!("{:>11}: {:4}{}", "Forecast", get_emoji_from_weather_str(forecast), forecast);
         println!(
             "{:>11}: {:2} - {:2}",
             "Humidity", relative_humidity.low, relative_humidity.high
         );
         println!(
             "{:>11}: {:2} - {:2}",
-            "Temperature", temperature.low, temperature.high
+            "Temperature", get_styled_temp_str(temperature.low), get_styled_temp_str(temperature.high)
         );
         println!(
             "{:>11}: {:2} - {:2}",
