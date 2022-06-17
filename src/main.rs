@@ -35,7 +35,10 @@ enum Commands {
     #[clap(name = "a")]
     All,
     /// Print shell completions to stdout
-    Completions { shell: Option<Shell> },
+    Completions {
+        #[clap(long)]
+        shell: Option<Shell>
+    },
 }
 
 fn print_completions<G: Generator>(gen: G, cmd: &mut Command) {
