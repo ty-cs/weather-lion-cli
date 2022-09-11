@@ -98,7 +98,7 @@ fn get_emoji_from_weather_str(weather: &str) -> &str {
 pub fn get_2hr_weather() -> Result<(), ureq::Error> {
     let _started = Instant::now();
     // let pb = get_pb();
-
+    let now = Instant::now();
     // pb.set_message("Loading...");
     let body: TwoHourWeatherInfo =
         ureq::get("https://api.data.gov.sg/v1/environment/2-hour-weather-forecast")
@@ -120,10 +120,12 @@ pub fn get_2hr_weather() -> Result<(), ureq::Error> {
                 forecast.forecast,
             );
         });
+        let elapsed = now.elapsed();
         println!(
-            "\n{} {}",
+            "\n{} {} | RTT: {:.3?}",
             "Updated at".white(),
-            item.update_timestamp.white()
+            item.update_timestamp.white(),
+            elapsed
         );
 
         // println!("\nUpdated at: {}", item.update_timestamp);
