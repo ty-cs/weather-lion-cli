@@ -7,7 +7,6 @@ Weather CLI for SG
 - Blazing fast
 - Shell completions support (Bash, Shell, Fish, etc)
 - Colorful output :)
-- 
 
 
 ## Usage
